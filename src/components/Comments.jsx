@@ -1,4 +1,7 @@
-import React from "react";
+// import { Button } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Comment from "./Comment";
 
@@ -18,27 +21,91 @@ const Avatar = styled.img`
 
 const Input = styled.input`
   border: none;
-  border-bottom: 1px solid #a6a6a6;
+  border-bottom: 1px solid ${({ theme }) => theme.soft};
+  color: ${({ theme }) => theme.text};
   background-color: transparent;
   outline: none;
   padding: 5px;
   width: 100%;
 `;
 
-const Comments = () => {
+const AddCommentWrapper = styled.div`
+  /* display: flex;
+  flex-direction: column; */
+`;
+
+const CommentButton = styled.button`
+  color: white;
+  background-color: #ff1a1a;
+  font-weight: 500;
+  height: max-content;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 5px;
+  position: relative;
+  left: 665px;
+`;
+
+const Comments = ({ videoID }) => {
+  //   const { currentVideo } = useSelector((state) => state.video);
+  const [comment, setComment] = useState("");
+  const { currentUser } = useSelector((state) => state.user);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8000/api/comment/${videoID}`
+        );
+
+        setComments(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchComments();
+  }, [videoID]);
+
+  const handleComment = async (e) => {
+    e.preventDefault();
+    try {
+      const headers = {
+        Authorization: currentUser.token,
+        userID: currentUser.data._id,
+      };
+
+      await axios.post(
+        "http://localhost:8000/api/comment",
+        {
+          videoID,
+          desc: comment,
+        },
+        { headers }
+      );
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Container>
-      <NewComment>
-        <Avatar src="https://yt3.ggpht.com/Yql1zU-Z3XOi_qZ_z4ABKDe9lCiwczMdTCGAnnXM9vOA5XomLk1mOwd1pVCn1QEL5HStowCO7Fk=s88-c-k-c0x00ffffff-no-rj" />
-        <Input placeholder="Add a comment..." />
-      </NewComment>
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
+      <AddCommentWrapper>
+        <NewComment>
+          <Avatar src={currentUser?.data.image} />
+          <Input
+            placeholder="Add a comment..."
+            onChange={(e) => setComment(e.target.value)}
+          />
+        </NewComment>
+        <CommentButton onClick={handleComment}>Comment</CommentButton>
+      </AddCommentWrapper>
+      {comments?.map((comment, i) => (
+        <Comment key={comment._id} comment={comment} />
+      ))}
     </Container>
   );
 };

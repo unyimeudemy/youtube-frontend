@@ -1,5 +1,7 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { format } from "timeago.js";
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +19,7 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  color: ${({ theme }) => theme.text};
 `;
 
 const Name = styled.span`
@@ -27,7 +30,7 @@ const Name = styled.span`
 const Date = styled.span`
   font-size: 12px;
   font-weight: 400;
-  color: #808080;
+  color: ${({ theme }) => theme.textSoft};
   margin-left: 5px;
 `;
 
@@ -35,20 +38,31 @@ const Text = styled.div`
   font-size: 14px;
 `;
 
-const Comment = () => {
+const Comment = ({ comment }) => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    try {
+      const fetchUser = async () => {
+        const res = await axios.get(
+          `http://localhost:8000/api/user/find/${comment.userID}`
+        );
+        setUser(res.data);
+      };
+      fetchUser();
+    } catch (err) {
+      console.log(err);
+    }
+  }, [comment.userID]);
+
   return (
     <Container>
-      <Avatar src="https://yt3.ggpht.com/Yql1zU-Z3XOi_qZ_z4ABKDe9lCiwczMdTCGAnnXM9vOA5XomLk1mOwd1pVCn1QEL5HStowCO7Fk=s88-c-k-c0x00ffffff-no-rj" />
+      <Avatar src={user.ImageUrl} />
       <Details>
         <Name>
-          unyime <Date> 2 days ago</Date>
+          {user.name} <Date> {format(user.createdAt)}</Date>
         </Name>
-        <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea quidem eum
-          consequatur autem veritatis repudiandae neque assumenda inventore
-          voluptas recusandae unde, sapiente repellat molestias, quos ullam aut
-          dignissimos est! Vel!
-        </Text>
+        <Text>{comment.desc}</Text>
       </Details>
     </Container>
   );

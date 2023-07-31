@@ -1,39 +1,30 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
 import SignIn from "./pages/SignIn";
-import { darkTheme, lightTheme } from "./utils/theme.js";
-
+import { darkTheme, lightTheme } from "./utils/Theme.js";
 import {
-  createBrowserRouter,
-  RouterProvider,
+  //   createBrowserRouter,
+  //   RouterProvider,
   BrowserRouter,
   Routes,
   Route,
-  Link,
+  //   Link,
 } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Video from "./pages/Video";
+import Search from "./components/Search";
 
 const Container = styled.div`
   display: flex;
 `;
 
-const ThemeProvider = styled.div``;
-
 const Main = styled.div`
   flex: 7;
-  /* background-color: white; */
-  background-color: #f2f2f2;
+  background-color: ${({ theme }) => theme.bg};
 `;
-
-// bg: "#f9f9f9",
-// bgLighter: "white",
-// text: "black",
-// textSoft: "#606060",
-// soft: "#f5f5f5"
 
 const Wrapper = styled.div`
   /* padding: 96px; */
@@ -41,19 +32,22 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  //   const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Container>
         <BrowserRouter>
-          <Menu />
+          <Menu setDarkMode={setDarkMode} darkMode={darkMode} />
           <Main>
             <Navbar />
             <Wrapper>
               <Routes>
                 <Route path="/">
-                  <Route index element={<Home />} />
+                  <Route index element={<Home type="random" />} />
+                  <Route path="trend" element={<Home type="trend" />} />
+                  <Route path="subscriptions" element={<Home type="sub" />} />
+                  <Route path="tags" element={<Search />} />
                   <Route path="signin" element={<SignIn />} />
                   <Route path="video">
                     <Route path=":id" element={<Video />} />
