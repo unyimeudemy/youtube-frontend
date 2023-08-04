@@ -156,7 +156,7 @@ const Video = () => {
         userID: currentUser.data._id,
       };
       await axios.put(
-        `https://youtube-backend.onrender.com/user/like/${currentVideo._id}`,
+        `https://youtube-backend-a8v8.onrender.com/user/like/${currentVideo._id}`,
         { headers }
       );
       dispatch(like(currentUser.data._id));
@@ -171,7 +171,7 @@ const Video = () => {
         userID: currentUser.data._id,
       };
       await axios.put(
-        `https://youtube-backend.onrender.com/user/unlike/${currentVideo._id}`,
+        `https://youtube-backend-a8v8.onrender.com/user/unlike/${currentVideo._id}`,
         { headers }
       );
       //UPDATING THE DISLIKE ACTION IN DISLIKESLICE
@@ -188,11 +188,11 @@ const Video = () => {
 
       currentUser.data.subscribedChannels.includes(channel._id)
         ? await axios.put(
-            `https://youtube-backend.onrender.com/user/unsub/${channel._id}`,
+            `https://youtube-backend-a8v8.onrender.com/user/unsub/${channel._id}`,
             { headers }
           )
         : await axios.put(
-            `https://youtube-backend.onrender.com/user/sub/${channel._id}`,
+            `https://youtube-backend-a8v8.onrender.com/user/sub/${channel._id}`,
             {
               headers,
             }

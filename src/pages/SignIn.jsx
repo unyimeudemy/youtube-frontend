@@ -107,7 +107,7 @@ const SignIn = () => {
     dispatch(loginStart());
     try {
       const res = await axios.post(
-        "https://youtube-backend.onrender.com/auth/signin",
+        "https://youtube-backend-a8v8.onrender.com/auth/signin",
         {
           email,
           password,
@@ -133,7 +133,7 @@ const SignIn = () => {
       .then((result) => {
         const func = async () => {
           const res = await axios.post(
-            "https://youtube-backend.onrender.com/auth/google",
+            "https://youtube-backend-a8v8.onrender.com/auth/google",
             {
               name: result.user.displayName,
               email: result.user.email,
@@ -155,7 +155,7 @@ const SignIn = () => {
     dispatch(loginStart());
     try {
       const res = await axios.post(
-        "https://youtube-backend.onrender.com/auth/signup",
+        "https://youtube-backend-a8v8.onrender.com/auth/signup",
         {
           name,
           email,

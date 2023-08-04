@@ -58,7 +58,7 @@ const Comments = ({ videoID }) => {
     const fetchComments = async () => {
       try {
         const res = await axios.get(
-          `https://youtube-backend.onrender.com/comment/${videoID}`
+          `https://youtube-backend-a8v8.onrender.com/comment/${videoID}`
         );
 
         setComments(res.data);
@@ -79,7 +79,7 @@ const Comments = ({ videoID }) => {
 
       await axios.post(
         // "http://localhost:8000/api/comment",
-        "https://youtube-backend.onrender.com/comment",
+        "https://youtube-backend-a8v8.onrender.com/comment",
         {
           videoID,
           desc: comment,

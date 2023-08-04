@@ -155,7 +155,7 @@ const Upload = ({ setOpen }) => {
   const handleUpload = async (e) => {
     e.preventDefault();
     const res = await axios.post(
-      "https://youtube-backend.onrender.com/video",
+      "https://youtube-backend-a8v8.onrender.com/video",
       {
         ...input,
         tags,
