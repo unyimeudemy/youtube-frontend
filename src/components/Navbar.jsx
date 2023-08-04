@@ -9,7 +9,6 @@ import VideoCallOutlinedIcon from "@mui/icons-material/VideoCallOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import MicOutlinedIcon from "@mui/icons-material/MicOutlined";
 import Upload from "./Upload";
-import px2vw from "../utils/px2vw";
 import Profile from "./Profile";
 
 const Container = styled.div`

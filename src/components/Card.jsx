@@ -122,7 +122,9 @@ const Card = ({ type, video }) => {
   try {
     useEffect(() => {
       const fetchChannel = async () => {
-        const res = await axios.get(`/user/find/${video.userID}`);
+        const res = await axios.get(
+          `https://youtube-backend.onrender.com/user/find/${video.userID}`
+        );
         setChannel(res.data);
       };
       fetchChannel();

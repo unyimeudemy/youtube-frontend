@@ -45,7 +45,7 @@ const Comment = ({ comment }) => {
     try {
       const fetchUser = async () => {
         const res = await axios.get(
-          `http://localhost:8000/api/user/find/${comment.userID}`
+          `https://youtube-backend.onrender.com/user/find/${comment.userID}`
         );
         setUser(res.data);
       };

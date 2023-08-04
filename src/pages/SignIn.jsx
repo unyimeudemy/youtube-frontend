@@ -106,10 +106,13 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/signin", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://youtube-backend.onrender.com/auth/signin",
+        {
+          email,
+          password,
+        }
+      );
 
       //   import Cookies from "universal-cookie";
       //   const cookies = new Cookies();
@@ -130,7 +133,7 @@ const SignIn = () => {
       .then((result) => {
         const func = async () => {
           const res = await axios.post(
-            "http://localhost:8000/api/auth/google",
+            "https://youtube-backend.onrender.com/auth/google",
             {
               name: result.user.displayName,
               email: result.user.email,
@@ -151,11 +154,14 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/signup", {
-        name,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://youtube-backend.onrender.com/auth/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
       dispatch(loginSuccess(res.data));
       //redirect

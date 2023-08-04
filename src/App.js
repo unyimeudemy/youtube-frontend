@@ -3,15 +3,8 @@ import styled, { ThemeProvider } from "styled-components";
 import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
 import SignIn from "./pages/SignIn";
-import { darkTheme, lightTheme } from "./utils/Theme.js";
-import {
-  //   createBrowserRouter,
-  //   RouterProvider,
-  BrowserRouter,
-  Routes,
-  Route,
-  //   Link,
-} from "react-router-dom";
+import { darkTheme, lightTheme } from "./pages/Theme.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Video from "./pages/Video";
