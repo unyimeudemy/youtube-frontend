@@ -17,7 +17,7 @@ const Search = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       const res = await axios.get(
-        `https://youtube-backend-a8v8.onrender.com/video/tags${query}`
+        `https://youtube-backend-a8v8.onrender.com/api/video/tags${query}`
       );
       setVideos(res.data);
     };

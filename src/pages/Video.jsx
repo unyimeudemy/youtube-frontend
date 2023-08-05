@@ -156,7 +156,7 @@ const Video = () => {
         userID: currentUser.data._id,
       };
       await axios.put(
-        `https://youtube-backend-a8v8.onrender.com/user/like/${currentVideo._id}`,
+        `https://youtube-backend-a8v8.onrender.com/api/user/like/${currentVideo._id}`,
         {
           headers,
         }
@@ -173,7 +173,7 @@ const Video = () => {
         userID: currentUser.data._id,
       };
       await axios.put(
-        `https://youtube-backend-a8v8.onrender.com/user/unlike/${currentVideo._id}`,
+        `https://youtube-backend-a8v8.onrender.com/api/user/unlike/${currentVideo._id}`,
         {
           headers,
         }
@@ -192,13 +192,13 @@ const Video = () => {
 
       currentUser.data.subscribedChannels.includes(channel._id)
         ? await axios.put(
-            `https://youtube-backend-a8v8.onrender.com/user/unsub/${channel._id}`,
+            `https://youtube-backend-a8v8.onrender.com/api/user/unsub/${channel._id}`,
             {
               headers,
             }
           )
         : await axios.put(
-            `https://youtube-backend-a8v8.onrender.com/user/sub/${channel._id}`,
+            `https://youtube-backend-a8v8.onrender.com/api/user/sub/${channel._id}`,
             {
               headers,
             }
