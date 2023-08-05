@@ -140,8 +140,12 @@ const Video = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const videoRes = await axios.get(`/video/find/${path}`);
-      const channelRes = await axios.get(`/user/find/${videoRes.data.userID}`);
+      const videoRes = await axios.get(
+        `https://youtube-backend-a8v8.onrender.com/api/video/find/${path}`
+      );
+      const channelRes = await axios.get(
+        `https://youtube-backend-a8v8.onrender.com/api/user/find/${videoRes.data.userID}`
+      );
 
       setChannel(channelRes.data);
       dispatch(fetchSuccess(videoRes.data));
