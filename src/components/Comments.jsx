@@ -78,7 +78,7 @@ const Comments = ({ videoID }) => {
       };
 
       await axios.post(
-        // "http://localhost:8000/api/comment",
+        // "https://youtube-backend-a8v8.onrender.com/api/comment",
         "https://youtube-backend-a8v8.onrender.com/comment",
         {
           videoID,
