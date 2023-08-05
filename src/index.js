@@ -10,7 +10,7 @@ disableReactDevTools();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <React.StrictMode basename="/">
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <App />
